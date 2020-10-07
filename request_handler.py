@@ -1,6 +1,7 @@
 from http.server import BaseHTTPRequestHandler, HTTPServer
-from animals import get_all_animals, get_all_locations, get_single_animal, get_single_location
-
+from animals import get_all_animals, get_single_animal
+from locations import get_all_locations, get_single_location
+from customers import get_all_customers, get_single_customer
 # Here's a class. It inherits from another class.
 class HandleRequests(BaseHTTPRequestHandler):
     def parse_url(self, path):
@@ -55,6 +56,12 @@ class HandleRequests(BaseHTTPRequestHandler):
 
             else:
                 response = f"{get_all_locations()}"
+        elif resource == "customers":
+            if id is not None:
+                response = f"{get_single_customer(id)}"
+
+            else:
+                response = f"{get_all_customers()}"
         else:
             response = []
 
