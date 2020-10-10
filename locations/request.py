@@ -28,6 +28,15 @@ def get_single_location(id):
     
     return requested_location
 
+def delete_location(id):
+    location_index = -1
+    for index, location in enumerate(LOCATIONS):
+        if location["id"] == id:
+            location_index = index
+
+    if location_index >= 0:
+        LOCATIONS.pop(location_index)
+
 def create_location(location):
     max_id = LOCATIONS[-1]["id"]
     new_id = max_id + 1
@@ -35,3 +44,9 @@ def create_location(location):
     LOCATIONS.append(location)
 
     return location
+
+def update_location(id, new_location):
+    for index, location in enumerate(LOCATIONS):
+        if location["id"] == id:
+            LOCATIONS[index] = new_location
+            break
