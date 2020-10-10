@@ -4,21 +4,21 @@ EMPLOYEES = [
         "name": "Suzy",
         "position": "Manager",
         "employeeId": 1,
-        "customerId": 4
+        "employeeId": 4
     },
     {
         "id": 2,
         "name": "Jim",
         "position": "Cashier",
         "employeeId": 1,
-        "customerId": 2
+        "employeeId": 2
     },
     {
         "id": 3,
         "name": "Fred",
         "position": "Janitor",
         "employeeId": 2,
-        "customerId": 1
+        "employeeId": 1
     }
 ]
 
@@ -46,3 +46,12 @@ def create_employee(employee):
     EMPLOYEES.append(employee)
 
     return employee
+
+def delete_employee(id):
+    employee_index = -1
+    for index, employee in enumerate(EMPLOYEES):
+        if employee["id"] == id:
+            employee_index = index
+
+    if employee_index >= 0:
+        EMPLOYEES.pop(employee_index)
