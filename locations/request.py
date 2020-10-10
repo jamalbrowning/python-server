@@ -1,18 +1,18 @@
 LOCATIONS = [
     {
         "id": 1,
-        "name": "TEST1",
-        "locationId": 1
+        "name": "Nashville North",
+        "address": "8422 Johnson Pike"
     },
     {
         "id": 2,
-        "name": "TEST2",
-        "locationId": 1
+        "name": "Nashville South",
+        "address": "888777 Somewhere"
     },
     {
         "id": 3,
-        "name": "TEST3",
-        "locationId": 2
+        "name": "Nashville West",
+        "address": "2343 West Lane Ave"
     }
 ]
 
