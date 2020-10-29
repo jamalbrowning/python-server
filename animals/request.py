@@ -16,21 +16,31 @@ ANIMALS = [
 # def get_all_animals():
 #     return ANIMALS
 
-def create_animal(animal):
-    # Get the id value of the last animal in the list
-    last_animal = ANIMALS[-1]
+def create_animal(new_animal):
+    with sqlite3.connect("./kennel.db") as conn:
+        db_cursor = conn.cursor()
 
-    # Add 1 to whatever that number is
-    new_id = last_animal.id + 1
+        db_cursor.execute("""
+        INSERT INTO Animal
+            ( name, breed, status, location_id, customer_id )
+        VALUES
+            ( ?, ?, ?, ?, ?);
+        """, (new_animal['name'], new_animal['species'],
+              new_animal['status'], new_animal['location_id'],
+              new_animal['customer_id'], ))
 
-    # Add an `id` property to the animal dictionary
-    animal["id"] = new_id
+        # The `lastrowid` property on the cursor will return
+        # the primary key of the last thing that got added to
+        # the database.
+        id = db_cursor.lastrowid
 
-    # Add the animal dictionary to the list
-    new_animal = Animal(animal['id'], animal['name'], animal['species'], animal['status'], animal['location_id'], animal['customer_id'])
-    ANIMALS.append(new_animal)
-    # Return the dictionary with `id` property added
-    return animal
+        # Add the `id` property to the animal dictionary that
+        # was sent by the client so that the client sees the
+        # primary key in the response.
+        new_animal['id'] = id
+
+
+    return json.dumps(new_animal)
 
 def delete_animal(id):
     # Initial -1 value for animal index, in case one isn't found
